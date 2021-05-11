@@ -10,9 +10,13 @@ const initialState = {
 const reducer = (state, action) => {
    switch (action.type) {
       case 'increment':
-         return { firstCounter: state.firstCounter + action.value };
+         return { ...state, firstCounter: state.firstCounter + action.value };
       case 'decrement':
-         return { firstCounter: state.firstCounter - action.value };
+         return { ...state, firstCounter: state.firstCounter - action.value };
+      case 'increment2':
+         return { ...state, secondCounter: state.secondCounter + action.value };
+      case 'decrement2':
+         return { ...state, secondCounter: state.secondCounter - action.value };
       case 'reset':
          return initialState;
       default:
@@ -29,7 +33,8 @@ function Counter() {
 
    return (
       <div>
-         <div className='count'> Count - {count.firstCounter}</div>
+         <div className='count'> Counter One - {count.firstCounter}</div>
+         <div className='count'> Counter Two - {count.secondCounter}</div>
          <button onClick={() => dispatch({ type: 'increment', value: 1 })}>
             Increment
          </button>
@@ -42,9 +47,23 @@ function Counter() {
          <button onClick={() => dispatch({ type: 'decrement', value: 5 })}>
             Decrement by 5
          </button>
+         <div>
+            <button onClick={() => dispatch({ type: 'increment2', value: 1 })}>
+               Increment2
+            </button>
+            <button onClick={() => dispatch({ type: 'decrement2', value: 1 })}>
+               Decrement2
+            </button>
+         </div>
          <button onClick={() => dispatch({ type: 'reset' })}>Reset</button>
       </div>
    );
 }
 
 export default Counter;
+
+/**
+ Advantage of obect pattern when using useReducer
+   1. we can pass additional data to the reducer function thereby allowing a robust action.
+   2. we can maintain as many state properties as we want.
+*/
