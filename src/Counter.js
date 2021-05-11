@@ -1,15 +1,18 @@
 import React, { useReducer } from 'react';
 
 //define initial state
-const initialState = 0;
+const initialState = {
+   firstCounter: 0,
+   secondCounter: 3,
+};
 
 //define reducer function - accepts 2 values (currentState & action) and returns one value, a new state; action transition the current state to a new state. We can percive the action as a set of instructions to the reducer function carries out on the current state
 const reducer = (state, action) => {
-   switch (action) {
+   switch (action.type) {
       case 'increment':
-         return state + 1;
+         return { firstCounter: state.firstCounter + action.value };
       case 'decrement':
-         return state - 1;
+         return { firstCounter: state.firstCounter - action.value };
       case 'reset':
          return initialState;
       default:
@@ -26,10 +29,20 @@ function Counter() {
 
    return (
       <div>
-         <div className='count'> Count - {count}</div>
-         <button onClick={() => dispatch('increment')}>Increment</button>
-         <button onClick={() => dispatch('decrement')}>Decrement</button>
-         <button onClick={() => dispatch('reset')}>Reset</button>
+         <div className='count'> Count - {count.firstCounter}</div>
+         <button onClick={() => dispatch({ type: 'increment', value: 1 })}>
+            Increment
+         </button>
+         <button onClick={() => dispatch({ type: 'decrement', value: 1 })}>
+            Decrement
+         </button>
+         <button onClick={() => dispatch({ type: 'increment', value: 5 })}>
+            Increment by 5
+         </button>
+         <button onClick={() => dispatch({ type: 'decrement', value: 5 })}>
+            Decrement by 5
+         </button>
+         <button onClick={() => dispatch({ type: 'reset' })}>Reset</button>
       </div>
    );
 }
