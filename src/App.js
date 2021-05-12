@@ -1,7 +1,10 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, createContext } from 'react';
 import ComponentA from './components/ComponentA';
 import ComponentB from './components/ComponentB';
 import ComponentC from './components/ComponentC';
+
+//create context
+export const CountContext = createContext();
 
 //define initial state
 const initialState = 0;
@@ -24,17 +27,21 @@ function App() {
    const [count, dispatch] = useReducer(reducer, initialState);
 
    return (
-      <main>
-         <div className='container'>
-            <h3>useReducer & useContext</h3>
-            <div className='count'> Count - {count}</div>
-            <div className='components'>
-               <ComponentA />
-               <ComponentB />
-               <ComponentC />
+      <CountContext.Provider
+         value={{ countState: count, countDispatch: dispatch }}
+      >
+         <main>
+            <div className='container'>
+               <h3>useReducer & useContext</h3>
+               <div className='count'> Count - {count}</div>
+               <div className='components'>
+                  <ComponentA />
+                  <ComponentB />
+                  <ComponentC />
+               </div>
             </div>
-         </div>
-      </main>
+         </main>
+      </CountContext.Provider>
    );
 }
 
