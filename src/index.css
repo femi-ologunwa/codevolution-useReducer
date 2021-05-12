@@ -142,7 +142,7 @@ main {
 .container {
    width: 90vw;
    margin: 5rem 0;
-   max-width: var(--fixed-width);
+   /* max-width: var(--fixed-width); */
    background: var(--clr-white);
    border-radius: var(--radius);
    padding: 1.5rem 2rem;
@@ -200,4 +200,27 @@ main {
 
 .components {
    margin-top: 40px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+   .components {
+      flex-direction: column;
+   }
+}
+
+.board {
+   border: 1px solid #ccc;
+   padding: 0 2rem;
+   padding-bottom: 2rem;
+   margin-bottom: 2rem;
+}
+
+.title {
+   text-align: center;
+   text-align: center;
+   padding: 10px;
+   font-size: 2rem;
 }
