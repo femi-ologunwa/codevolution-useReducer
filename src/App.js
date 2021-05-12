@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import ComponentA from './components/ComponentA';
 import ComponentB from './components/ComponentB';
 import ComponentC from './components/ComponentC';
 
+//define initial state
+const initialState = 0;
+
+//define reducer function
+const reducer = (state, action) => {
+   switch (action) {
+      case 'increment':
+         return state + 1;
+      case 'decrement':
+         return state - 1;
+      case 'reset':
+         return initialState;
+      default:
+         return state;
+   }
+};
+
 function App() {
+   const [count, dispatch] = useReducer(reducer, initialState);
+
    return (
       <main>
          <div className='container'>
-            <ComponentA />
-            <ComponentB />
-            <ComponentC />
+            <h3>useReducer & useContext</h3>
+            <div className='count'> Count - {count}</div>
+            <div className='components'>
+               <ComponentA />
+               <ComponentB />
+               <ComponentC />
+            </div>
          </div>
       </main>
    );
